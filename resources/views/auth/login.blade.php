@@ -40,7 +40,7 @@
                             value="{{ old('user_id') ?? ''  }}">
                     </div>
                     <div>
-                        <input id="pass" name="password" type="password" placeholder="パスワード">
+                        <input id="password" name="password" type="password" placeholder="パスワード">
                     </div>
                     <div>
                         <button type="submit" class="button--oval--login">ログイン</button>

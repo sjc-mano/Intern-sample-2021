@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\Log;
 class CommonService
 {
     private $userRepository;
+    private $itemRepository;
 
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        ItemRepository $itemRepository
     ) {
         $this->userRepository = $userRepository;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
