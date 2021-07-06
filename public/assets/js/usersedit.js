@@ -177,6 +177,11 @@ $(function () {
 
                         let message = response.responseJSON.message;
                         alert(message);
+
+                        // ユーザが存在しない場合
+                        if (response.status == 404) {
+                            window.location.href = listUrl
+                        }
                     }).always((data) => {
                         $("#overlay").fadeOut(300); // Lading 画像を消す
                     });
@@ -189,7 +194,31 @@ $(function () {
         var result = window.confirm("ユーザID（" + userId.val() + "）を削除しますか？");
 
         if (result) {
-            $('#delete-form').submit();
+            $.ajax({
+                type: 'DELETE',
+                url: submitUrl,
+                dataType: 'json',
+                timeout: 15000,
+                beforeSend: (xhr) => {
+                    $("#overlay").fadeIn(300); // Lading 画像を表示
+                    xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'));
+                }
+            }).done((response) => {
+                let message = response.message;
+                alert(message);
+                window.location.href = listUrl
+            }).fail((response) => {
+                // サーバからエラー内容を取得してエラー内容ごとにメッセージを設定
+                if (response.status == 422) {
+                    let errors = response.responseJSON.errors;
+                    validationErrorDisplay(errors);
+                }
+
+                let message = response.responseJSON.message;
+                alert(message);
+            }).always((data) => {
+                $("#overlay").fadeOut(300); // Lading 画像を消す
+            });
         }
     });
 

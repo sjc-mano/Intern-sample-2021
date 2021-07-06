@@ -83,6 +83,7 @@
     const loginUserId = "{{ Auth::id() }}";
     const submitUrl = "{{ route('users.update', ['user_id' => $user->user_id]) }}";
     const editUrl = "{{ route('users.edit', ['user_id' => '@']) }}";
+    const listUrl = "{{ route('users.list') }}";
     // 戻るボタン
     $('#back_button').on('click', function () {
         window.location.href = "{{ route('users.list') }}";

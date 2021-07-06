@@ -75,12 +75,18 @@ class UserService
     public function store($request){
         DB::beginTransaction();
         try {
+            // 削除するユーザの取得
+            $user = $this->userRepository->get([['user_id', $request->user_id]]);
+            if($user){
+                $this->userRepository->destroy($user);
+            }
+
             // 追加
             $return = $this->userRepository->store([
                 'user_id' => $request->user_id,
                 'user_pass' => Hash::make($request->user_pass),
                 'user_name' => $request->user_name,
-                'mail_address' => $request->mailaddress ?? null
+                'mail_address' => $request->mail_address ?? null
             ]);
 
             DB::commit();
@@ -147,7 +153,7 @@ class UserService
             // 削除するユーザの取得
             $user = $this->userRepository->get([['user_id', $request->user_id]]);
             // 削除
-            $this->userRepository->destroy($user);
+            $this->userRepository->delete($user);
 
             DB::commit();
             return ['success' => config('const.MESSAGE.SUCCESS.DELETE'), 'status' => 200];
@@ -169,7 +175,7 @@ class UserService
     {
         $where = [['user_id', $userId]];
         $columns = ['*'];
-        $user = $this->userRepository->get($where, $columns)->first();
+        $user = $this->userRepository->get($where, $columns)->NotDeleted()->first();
 
         return $user;
     }

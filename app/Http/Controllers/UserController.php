@@ -74,9 +74,13 @@ class UserController extends Controller
         // ユーザ情報の取得
         $user = $this->userService->getUser($request['user_id']);
 
-        return view('users.edit')->with([
-            'user' => $user
-        ]);
+        if($user){
+            return view('users.edit')->with([
+                'user' => $user
+            ]);
+        }else{
+            return redirect()->route('users.list');
+        }
     }
 
     /**
@@ -87,6 +91,12 @@ class UserController extends Controller
      */
     public function update(EditUsersRequest $request)
     {
+        // 存在チェック
+        $user = $this->userService->getUser($request['user_id']);
+        if(is_null($user)){
+            return response()->json(['message' => config('const.MESSAGE.ERROR.DELETED')], 404);
+        }
+
         // 保存処理
         $return = $this->userService->update($request);
 
