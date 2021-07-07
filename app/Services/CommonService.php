@@ -36,7 +36,7 @@ class CommonService
         if($type === "User"){
             $updatedAt = $this->userRepository->get([['user_id', $id]], $column)->first()->updated_at;
         }else if($type === "Item"){
-
+            $updatedAt = $this->itemRepository->get([['item_id', $id]], $column)->first()->updated_at;
         }
 
         $displayPageTime = new Carbon($displayPageTime);
