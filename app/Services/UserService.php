@@ -90,12 +90,12 @@ class UserService
             ]);
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.STORE'), 'status' => 200];
+            return ['success' => __('messages.SUCCESS.STORE'), 'status' => 200];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('UserService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.STORE'), 'status' => 500];
+            return ['error' => __('messages.ERROR.STORE'), 'status' => 500];
         }
     }
 
@@ -112,7 +112,7 @@ class UserService
             // 排他チェック
             $updatedFlg = $this->commonService->updatedCheck("User", $request->user_id, $request->display_page_time);
             if($updatedFlg){
-                return ['error' => config('const.MESSAGE.ERROR.UPDATE'), 'status' => 409];
+                return ['error' => __('messages.ERROR.UPDATE'), 'status' => 409];
             }
 
             $update_data = [
@@ -130,12 +130,12 @@ class UserService
             $this->userRepository->update($user, $update_data);
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.UPDATE'), 'status' => 200];
+            return ['success' => __('messages.SUCCESS.UPDATE'), 'status' => 200];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('UserService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.UPDATE'), 'status' => 500];
+            return ['error' => __('messages.ERROR.UPDATE'), 'status' => 500];
         }
     }
 
@@ -156,12 +156,12 @@ class UserService
             $this->userRepository->delete($user);
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.DELETE'), 'status' => 200];
+            return ['success' => __('messages.SUCCESS.DELETE'), 'status' => 200];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('UserService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.STORE'), 'status' => 500];
+            return ['error' => __('messages.ERROR.STORE'), 'status' => 500];
         }
     }
 

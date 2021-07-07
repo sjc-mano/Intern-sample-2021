@@ -45,12 +45,12 @@ class ItemService
             ]);
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.STORE')];
+            return ['success' => __('messages.SUCCESS.STORE')];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('ItemService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.STORE')];
+            return ['error' => __('messages.ERROR.STORE')];
         }
     }
 
@@ -67,12 +67,12 @@ class ItemService
             // 処理
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.UPDATE')];
+            return ['success' => __('messages.SUCCESS.UPDATE')];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('ItemService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.STORE')];
+            return ['error' => __('messages.ERROR.STORE')];
         }
     }
 
@@ -90,12 +90,12 @@ class ItemService
             // 処理
 
             DB::commit();
-            return ['success' => config('const.MESSAGE.SUCCESS.DELETE')];
+            return ['success' => __('messages.SUCCESS.DELETE')];
         } catch (\Throwable $throwable) {
             Log::error($throwable->getFile() . " : line " . $throwable->getLine());
             Log::error('ItemService->store ExceptionMessage :\n ' . $throwable->getMessage());
             DB::rollBack();
-            return ['error' => config('const.MESSAGE.ERROR.STORE')];
+            return ['error' => __('messages.ERROR.STORE')];
         }
     }
 }

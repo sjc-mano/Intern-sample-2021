@@ -94,7 +94,7 @@ class UserController extends Controller
         // 存在チェック
         $user = $this->userService->getUser($request['user_id']);
         if(is_null($user)){
-            return response()->json(['message' => config('const.MESSAGE.ERROR.DELETED')], 404);
+            return response()->json(['message' => __('messages.ERROR.DELETED')], 404);
         }
 
         // 保存処理
@@ -118,7 +118,7 @@ class UserController extends Controller
         // 存在チェック
         $user = $this->userService->getUser($request['user_id']);
         if(is_null($user)){
-            return response()->json(['message' => config('const.MESSAGE.SUCCESS.DELETE')], 200);
+            return response()->json(['message' => __('messages.SUCCESS.DELETE')], 200);
         }
 
         // 削除処理
