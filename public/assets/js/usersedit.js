@@ -52,7 +52,16 @@ $(function () {
 
     userPassword.on("blur", () => {
         if (userPassword.val() == "") {
-            userPassword.val("●●●●");
+            if (url.match(/\/users\/[\S]+\/edit/)) {
+                userPassword.val("●●●●");
+                errorUserPassword.hide();
+                errorCountUserPassword = "0";
+            }
+            else {
+                errorUserPassword.css("display", "block");
+                errorUserPassword.text("パスワードを入力してください。");
+                errorCountUserPassword = "1";
+            }
         }
         else if (!userPassword.val().match(/^[0-9a-zA-Z]*$/)) {
             errorUserPassword.css("display", "block");
