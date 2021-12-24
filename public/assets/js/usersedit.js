@@ -155,7 +155,7 @@ $(function () {
                             let errors = response.responseJSON.errors;
                             validationErrorDisplay(errors);
                         }
-                        console.log(response);
+
                         let message = response.responseJSON.message;
                         alert(message);
                     }).always((data) => {
@@ -215,7 +215,7 @@ $(function () {
             }).done((response) => {
                 let message = response.message;
                 alert(message);
-                window.location.href = listUrl
+                window.location.href = listUrl;
             }).fail((response) => {
                 // サーバからエラー内容を取得してエラー内容ごとにメッセージを設定
                 if (response.status == 422) {

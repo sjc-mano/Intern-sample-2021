@@ -14,6 +14,12 @@ class MItem extends Model
 
     protected $fillable = [
         'item_id',
+        'company_code',
+        'box_code',
+        'box_num',
+        'start_date',
+        'end_date',
+        'company_name',
         'created_at',
         'updated_at',
         'delete_flg'
@@ -24,7 +30,7 @@ class MItem extends Model
         'updated_at' => 'datetime'
     ];
 
-    // 削除フラグのスコープ（削除されていないものを取得）
+    // 条件に削除されていないものを追加
     public function scopeNotDeleted($query)
     {
         return $query->where('delete_flg', 0);

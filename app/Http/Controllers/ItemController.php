@@ -25,9 +25,9 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        // 検索条件に一致するユーザの取得
+        // 検索条件に一致する品番の取得
         $items = $this->itemService->search($request);
-
+        Log::debug($items);
         return view('items.list')->with([
             'items' => $items
         ]);

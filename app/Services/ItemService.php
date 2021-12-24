@@ -25,9 +25,10 @@ class ItemService
      */
     public function search(Request $request)
     {
-        // $data = array_filter($request->input());
+        $data = array_filter($request->input());
+        $searchItemId = $data['item_id'] ?? "";
 
-        // return $this->itemRepository->get($where, $columns)->NotDeleted()->get();
+        return $this->itemRepository->getSearchResult($searchItemId)->get();
     }
 
     /**

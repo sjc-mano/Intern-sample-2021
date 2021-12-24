@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\CommonRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\ItemRepository;
 use Carbon\Carbon;
@@ -10,15 +11,37 @@ use Illuminate\Support\Facades\Log;
 
 class CommonService
 {
+    private $commonRepository;
     private $userRepository;
     private $itemRepository;
 
     public function __construct(
+        CommonRepository $commonRepository,
         UserRepository $userRepository,
         ItemRepository $itemRepository
     ) {
+        $this->commonRepository = $commonRepository;
         $this->userRepository = $userRepository;
         $this->itemRepository = $itemRepository;
+    }
+
+    /**
+     * 
+     * 
+     * @param array $commonIds
+     * @return array
+     */
+    public function getCommonList(array $commonIds)
+    {
+        foreach($commonIds as $commonId){
+            $commons = $this->commonRepository->getByCommonId($commonId)->get();
+
+            foreach($commons as $common){
+                $commonList[$commonId][$common->common_type_id] = $common->common_type_name;
+            }
+        }
+
+        return $commonList;
     }
 
     /**
