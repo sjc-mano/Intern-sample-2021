@@ -30,3 +30,6 @@ a,address,article,aside,audio,b,body,button,canvas,caption,dd,del,div,dl,dt,fiel
 .is-hide{
   display:none;
 }
+.fadeincontent{
+    display:none;
+}

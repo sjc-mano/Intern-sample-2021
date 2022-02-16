@@ -25,7 +25,7 @@
 
 <body class="preload">
     <div id="app" class="wrapper">
-        <div class="content">
+        <div class="content fadeincontent">
             @include('shared.header')
 
             @yield('content')
@@ -46,6 +46,9 @@
         document.getElementById("item_li").onclick = function () {
             window.location.href = "{{ route('items.list') }}";
         };
+        
+        
+        
     </script>
 </body>
 

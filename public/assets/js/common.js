@@ -6,6 +6,8 @@ $(function () {
     const header_username = $("#js-headeruserName");
     const logout = $(".header__sp__logout__second__li__link");
 
+    $('.fadeincontent').fadeIn(); 
+    
     // Enterでsubmitされないようにする
     $(document).on("keypress", "input", function (ev) {
         if ((ev.which && ev.which === 13) ||
